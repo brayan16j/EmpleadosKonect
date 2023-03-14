@@ -1,67 +1,67 @@
-import React, { useState }  from 'react';
+import React, { useState } from 'react';
 import crud from '../conexiones/crud';
-import {  Link, useNavigate, useParams  } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-export const Solicitud = ({empleado}) =>{
+ const Solicitud = () => {
 
-const navigate = useNavigate();
+  //const navigate = useNavigate();
 
-const {idEmpleado} = useParams();
+  const { idEmpleado } = useParams();
 
 
   const [solicitud, setSolicitud] = useState({
-    codigo:'',
-    descripcion:'',
-    resumen:'',
-    empleadoId:''
+    codigo: '',
+    descripcion: '',
+    resumen: '',
+    empleadoId: ''
 
   })
-  const { codigo, descripcion, resumen} = solicitud;
+  const { codigo, descripcion, resumen } = solicitud;
 
-  const onChange = (e) =>{
+  const onChange = (e) => {
     setSolicitud({
       ...solicitud,
       [e.target.name]: e.target.value
     })
   }
 
-  const crearSolicitud = async () =>{
+  const crearSolicitud = async () => {
     const data = {
       codigo: solicitud.codigo,
       descripcion: solicitud.descripcion,
       resumen: solicitud.resumen,
       empleadoId: idEmpleado
     }
-   
-  
-    const response = await crud.POST(`/api/solicitud/empleado/${idEmpleado}`, data);
-      const mensaje = response.mensaje;
-      console.log(mensaje);
-      setSolicitud({
-        codigo:'',
-        descripcion:'',
-        resumen:'',
-      });
-      
-      
-}
-const onSubmit = (e) => {
-  e.preventDefault();
-  crearSolicitud();
-}
 
-return (
+
+    const response = await crud.POST(`/api/solicitud/empleado/${idEmpleado}`, data);
+    //const mensaje = response.mensaje;
+    //console.log(mensaje);
+    setSolicitud({
+      codigo: '',
+      descripcion: '',
+      resumen: '',
+    });
+
+
+  }
+  const onSubmit = (e) => {
+    e.preventDefault();
+    crearSolicitud();
+  }
+
+  return (
     <>
-    <main className='container mx-auto mt-5 md:mt-20 p-5 md:flex md:justify-center'>
-       <div className='md:w-2/3 lg:w-2/5'>
+      <main className='container mx-auto mt-5 md:mt-20 p-5 md:flex md:justify-center'>
+        <div className='md:w-2/3 lg:w-2/5'>
           <div className='flex justify-center'>
             <h1 className="inline bg-gradient-to-r from-indigo-200 via-slate-400 to-indigo-200 bg-clip-text font-display text-5xl tracking-tight text-transparent m-10" >
-             Crear Solicitudes
+              Crear Solicitudes
             </h1>
           </div>
-          
 
-          <form 
+
+          <form
             className='my-10 bg-gray-700 shadow rounded-lg p-10 '
             onSubmit={onSubmit}
           >
@@ -77,7 +77,7 @@ return (
                 onChange={onChange}
               />
 
-          <label className='uppercase text-white block text-xl font-bold' >Descripcion</label>
+              <label className='uppercase text-white block text-xl font-bold' >Descripcion</label>
               <input
                 type="descripcion"
                 id="descripcion"
@@ -87,7 +87,7 @@ return (
                 value={descripcion}
                 onChange={onChange}
               />
-          <label className='uppercase text-white block text-xl font-bold' >resumen</label>
+              <label className='uppercase text-white block text-xl font-bold' >resumen</label>
               <input
                 type="resumen"
                 id="resumen"
@@ -99,25 +99,25 @@ return (
               />
 
             </div>
-              
-            <input 
+
+            <input
               type="submit"
               value="Crear Solicitud"
               className="bg-blue-500 mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-blue-300  transition-colors"
-          />
-          <Link 
-          to={"/"}
-          className="block text-center my-5 text-blue-500  uppercase text-sm"
-          >Crear Empleado</Link>
+            />
+            <Link
+              to={"/"}
+              className="block text-center my-5 text-blue-500  uppercase text-sm"
+            >Crear Empleado</Link>
 
-          <Link 
-          to={"/ver-solicitudes"}
-          className="block text-center my-5 text-blue-500  uppercase text-sm"
-          >Ver Solicitudes</Link>
+            <Link
+              to={"/ver-solicitudes"}
+              className="block text-center my-5 text-blue-500  uppercase text-sm"
+            >Ver Solicitudes</Link>
           </form>
-       </div>
-       
-    </main>
+        </div>
+
+      </main>
     </>
   );
 
