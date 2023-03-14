@@ -30,7 +30,7 @@ public class Empleado implements Serializable {
     private Integer salario;
 
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL,orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference //ignora la serializacion, recursividad, referencias circulares
     public Set<Solicitud> solicitudes = new HashSet<>();
 
 

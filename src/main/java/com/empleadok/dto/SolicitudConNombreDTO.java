@@ -6,18 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.Set;
-
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmpleadoDTO {
-    private Long id;
-    private Date fechaIngreso;
-    private String nombre;
-    private Integer salario;
-    private Set<Solicitud> solicitudes;
+public class SolicitudConNombreDTO {
 
+    private Solicitud solicitud;
+    private String nombreEmpleado;
 }
